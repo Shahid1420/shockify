@@ -19,20 +19,24 @@ const SignIn = () => {
     data: SignInFormData
   ) => {
     try {
-      const checkUser = async () => {
-        const res = await fetch("/api/login", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(data),
-        });
-        const user = await res.json();
-        console.log(user);
-      };
-      checkUser();
+      const res = await fetch("/api/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+      const result = await res.json();
+      if (!res.ok) {
+        console.error("Login failed:", result.error || "Unknown error");
+        // TODO: Show error to user
+        return;
+      }
+      console.log(result);
+      // TODO: Redirect to dashboard or save session
     } catch (e) {
       console.error(e);
+      // TODO: Show network error to user
     }
   };
 
