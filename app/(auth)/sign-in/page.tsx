@@ -19,7 +19,18 @@ const SignIn = () => {
     data: SignInFormData
   ) => {
     try {
-      console.log(data);
+      const checkUser = async () => {
+        const res = await fetch("/api/login", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        });
+        const user = await res.json();
+        console.log(user);
+      };
+      checkUser();
     } catch (e) {
       console.error(e);
     }
