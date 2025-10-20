@@ -1,6 +1,7 @@
 import { connectToDb } from "@/lib/mongodb";
 import User from "@/models/User";
 import UserMeta from "@/models/UserMeta";
+import mongoose from "mongoose";
 import { NextRequest, NextResponse } from "next/server";
 
 export const GET = async (
@@ -8,6 +9,8 @@ export const GET = async (
   { params }: { params: { id: string } }
 ) => {
   try {
+    if (!mongoose.Types.ObjectId.isValid(params.id))
+      return NextResponse.json({ error: "Invalid user ID" }, { status: 400 });
     await connectToDb();
     const user = await User.findById(params.id).select("-password").lean();
     if (!user)
