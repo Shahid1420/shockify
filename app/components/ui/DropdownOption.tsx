@@ -8,7 +8,7 @@ import {
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/DropddownMenu";
+} from "@/components/ui/DropdownMenu";
 import { UserAvatar } from "./UserAvatar";
 
 const DropdownOption = ({

@@ -1,5 +1,4 @@
 import Nav from "@/components/ui/Nav";
-import { UserAvatar } from "../components/ui/UserAvatar";
 import DropdownOption from "../components/ui/DropdownOption";
 
 const Header = () => {
