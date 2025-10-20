@@ -25,18 +25,21 @@ const SignIn = () => {
     data: SignUpFormData
   ) => {
     try {
-      const saveUser = async () => {
-        const res = await fetch("/api/user", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(data),
-        });
-        const user = await res.json();
-        console.log(user);
-      };
-      saveUser();
+      const res = await fetch("/api/user", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+      const result = await res.json();
+      if (!res.ok) {
+        console.error("Sign-up failed:", result.error || "Unknown error");
+        // TODO: Show error to user
+        return;
+      }
+      console.log("Sign-up successful:", result);
+      // TODO: Redirect to sign-in or dashboard
     } catch (e) {
       console.error(e);
     }
